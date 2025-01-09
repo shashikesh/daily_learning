@@ -158,6 +158,7 @@ Kubernetes services provide an essential abstraction for reliable and scalable c
 
 ### Probes
 | Feature	|`Liveness Probe`|	`Readiness Probe`|
+|---------|----------------|-------------------|
 | Purpose|	Ensures the container is running|.	Ensures the container can serve traffic.|
 | Action on| Fail	Restarts the container.|	Stops sending traffic to the container.|
 | Scope |	Long-term container health.|	Traffic routing.|
