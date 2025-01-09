@@ -157,10 +157,10 @@ spec:
 Kubernetes services provide an essential abstraction for reliable and scalable communication between pods and external clients. Choosing the right type of service is critical to meeting application requirements, whether for internal communication, external exposure, or integration with external systems.
 
 ### Probes
-|Feature	|`Liveness Probe`|	`Readiness Probe`|
-|Purpose|	Ensures the container is running|.	Ensures the container can serve traffic.|
-|Action on| Fail	Restarts the container.|	Stops sending traffic to the container.|
-|Scope|	Long-term container health.|	Traffic routing.|
+| Feature	|`Liveness Probe`|	`Readiness Probe`|
+| Purpose|	Ensures the container is running|.	Ensures the container can serve traffic.|
+| Action on| Fail	Restarts the container.|	Stops sending traffic to the container.|
+| Scope |	Long-term container health.|	Traffic routing.|
 
 #### Probe Types
 Both liveness and readiness probes support multiple types of checks:
