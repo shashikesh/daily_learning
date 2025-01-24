@@ -152,7 +152,7 @@ gcloud bigquery datasets delete DATASET_NAME
 gcloud compute networks list
 
 # Create a VPC network
-gcloud compute networks create NETWORK_NAME --subnet-mode=auto
+gcloud compute networks create NETWORK_NAME --subnet-mode=auto`
 
 # Delete a VPC network
 gcloud compute networks delete NETWORK_NAME
