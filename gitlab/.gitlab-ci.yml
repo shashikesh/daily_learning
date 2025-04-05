@@ -1,0 +1,95 @@
+default:
+  image: "abcs"
+
+stages:
+  - lint
+  - test
+  - security
+  - build
+  - deploy
+  - notify
+
+variables:
+  NODE_ENV: "production"
+  DOCKER_IMAGE: "my-app:latest"
+  DEPLOY_ENV: "staging"
+
+before_script:
+  - echo "Starting CI/CD pipeline..."
+
+lint:
+  stage: lint
+  image: node:latest
+  script:
+    - npm install
+    - npm run lint
+
+unit_test:
+  stage: test
+  image: node:latest
+  script:
+    - npm install
+    - npm test
+  artifacts:
+    paths:
+      - coverage/
+
+integration_test:
+  stage: test
+  image: node:latest
+  script:
+    - npm install
+    - npm run integration-test
+  dependencies:
+    - unit_test
+
+dependency_scan:
+  stage: security
+  image: docker.io/library/gemnasium:latest
+  script:
+    - gemnasium scan
+  allow_failure: true
+
+container_build:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker build -t $DOCKER_IMAGE .
+    - docker save -o my-app.tar $DOCKER_IMAGE
+  artifacts:
+    paths:
+      - my-app.tar
+
+deploy_staging:
+  stage: deploy
+  image: alpine:latest
+  script:
+    - echo "Deploying to staging..."
+    - scp my-app.tar user@staging-server:/deploy
+  environment:
+    name: staging
+    url: https://staging.myapp.com
+  only:
+    - main
+
+deploy_production:
+  stage: deploy
+  image: alpine:latest
+  script:
+    - echo "Deploying to production..."
+    - scp my-app.tar user@production-server:/deploy
+  environment:
+    name: production
+    url: https://myapp.com
+  when: manual
+  only:
+    - main
+
+notify:
+  stage: notify
+  image: curlimages/curl:latest
+  script:
+    - curl -X POST -H "Content-Type: application/json" -d '{"message": "CI/CD Pipeline completed successfully!"}' https://hooks.slack.com/services/your/slack/webhook
+  when: always
