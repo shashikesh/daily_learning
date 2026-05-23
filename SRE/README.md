@@ -11,7 +11,8 @@
     7. Simplicity  
 
 ### SRE principles vs DevOps principles
-    SRE and DevOps both operate based on a set of principles. Both sets of principles drive alignment towards business goals. Some of their principles overlap. When comparing SRE vs DevOps, the biggest difference is that DevOps principles describe goals. SRE principles describe processes to achieve goals. In this sense, SRE best practices are a way for operations teams to implement DevOps principles.
+    SRE and DevOps both operate based on a set of principles. Both sets of principles drive alignment towards business goals. 
+    Some of their principles overlap. When comparing SRE vs DevOps, the biggest difference is that DevOps principles describe goals. SRE principles describe processes to achieve goals. In this sense, SRE best practices are a way for operations teams to implement DevOps principles.
     ‍
 1. `embracing risk`  
     Embracing risk means weighing the costs of improving reliability and the impact it has on customer satisfaction.
